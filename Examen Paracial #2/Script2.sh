@@ -1,5 +1,5 @@
 #!/bin/bash
-#Se compila el archivo de C, procediendo luego a ejecutarlo 
+#Se compila el archivo de C, procediendo luego a ejecutarlo. 
 gcc Biseccion.c -lm -o bisec 
 ./bisec
 #2. Se hacen los respectivos ajustes acorde a los datos entregados como el rango de 0 a 1 en x como los labels
