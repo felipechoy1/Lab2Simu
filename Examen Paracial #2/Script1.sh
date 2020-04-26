@@ -1,5 +1,5 @@
 #!/bin/bash
-#Se compila el archivo de C, procediendo luego a ejecutarlo 
+#Se compila el archivo de C, procediendo luego a ejecutarlo. 
 gcc Cuadrados.c -lm -o cuad
 ./cuad
 #2. Se hacen los respectivos ajustes acorde a los datos entregados como el rango de años y títulos
