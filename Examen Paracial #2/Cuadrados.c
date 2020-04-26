@@ -4,8 +4,8 @@ Compilado: gcc Cuadrados.c -o cuad
 Fecha: abr sab 25 10:30:00 CST 2020
 librerias: <stdio.h> , <math.h>
 Resúmen: Se crea un programa que utliza el método numérico de mínimos cuadrados para ver si un conjunto de datos se ajusta a éste 
-Entradas: x,y, *fp
-Salidas: Datos.txt texto.gp 
+Entradas: x,y, *fp.
+Salidas: Datos.txt texto.gp .
 */
 
 #include <stdio.h>
