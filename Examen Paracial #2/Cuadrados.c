@@ -6,7 +6,7 @@ librerias: <stdio.h> , <math.h>
 Resúmen: Se crea un programa que utliza el método numérico de mínimos cuadrados para ver si un conjunto de datos se ajusta a éste 
 Entradas: x,y, *fp
 Salidas: Datos.txt texto.gp 
-*/
+*//
 //Se declararan librerías
 #include <stdio.h>
 #include <math.h>
