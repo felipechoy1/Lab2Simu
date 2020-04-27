@@ -6,7 +6,7 @@ librerias: <stdio.h> , <math.h>
 Resúmen: Se crea un programa que utliza el método numérico de bisección para hallar la raíz de una función
 Entradas: a,b
 Salida: h,err 
-*/
+*//
 
 
 //Se definen librerías
