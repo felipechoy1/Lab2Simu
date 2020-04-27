@@ -6,7 +6,7 @@ librerias: <stdio.h> , <math.h>
 Resúmen: Se crea un programa que utliza el método numérico de mínimos cuadrados para ver si un conjunto de datos se ajusta a éste 
 Entradas: x,y, *fp
 Salidas: Datos.txt texto.gp 
-*//
+*/
 //Se declararan librerías
 #include <stdio.h>
 #include <math.h>
@@ -16,7 +16,7 @@ double minc(double x[], double y[]); //Función para mínimos cuadrados
 double archivo(double x[], double y[], FILE *fp); //Función para crear archivos con datos y las funciones.
 
 //Variables globales a usar
-double sumax,sumaxc,sumay,sumayc,sumaxy;
+double sumax,sumaxc,sumay,sumayc,sumaxy,merr,berr,r,eps=0.1;
 double m,b; //Variable de pendiente m y corte b (y intersecto) 
 int i; //Iterador
 
@@ -26,13 +26,13 @@ int main()
     //Se almacenan los datos anteriormente dados
     double x[]={2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019};
     double y[]={1.003,0.961,0.928,0.913,0.880, 0.846, 0.807, 0.766, 0.734, 0.713, 0.692, 0.675, 0.656, 0.638};
-    puts("\n A continuación se mostrará el comportamiento del valor del dólar con respescto del euro mediante el método de mínimos cuadrados\n");
+    puts("\n A continuación se mostrará el comportamiento del valor del dólar con respecto del euro mediante el método de mínimos cuadrados\n");
     //Se llama a las 2 funciones principales
     minc(x,y);
     archivo(x,y,fp);
     
     //Imprimiendo la función y el el año en donde no valdrá nada (y=0)
-    printf("\n\t ///*La ecuación de la recta por regresión lineal es: y = %.3f x  + %.3f\n ", m,b); //Se despliega la función ajustada
+    printf("\n\t ///*La ecuación de la recta por regresión lineal es: y = (%.3f +- 0.00)x  + (%.3f +- %.3f) \n ", m,b,berr); //Se despliega la función ajustada
     printf("\t     El año en el que el dólar no valdrá nada será apróximadamente en %.0f *///\n", -b/m);
     return 0; 
 }
@@ -59,6 +59,17 @@ double minc(double x[], double y[])
     //Imprimiendo los datos importantes de la función
     m=(((n*sumaxy)-(sumax*sumay))/((n*sumaxc)-(sumax*sumax))); //Se utiliza la fórmula de pendiente para mínimos cuadrados.
     b=((sumay-(m*sumax))/n); //Caso similar con el y-intersécto  
+   
+    //Imprimiendo sus errores
+    merr=sqrt(n*eps/(sumaxc-(pow(sumax,2))));  //Error de la pendiente
+    berr=eps/n; //Error del intersecto
+    r=((n*sumaxy-sumax*sumay)/(sqrt(((n*sumaxc)-pow(sumax,2))*(n*sumayc-(pow(sumay,2)))))); //Coeficiente de correlación
+    //Se imprimen los resultados
+    printf("\n  //* El error en la pendiente es de %f",merr); 
+    printf("\n      El error del intercepto es %f",berr);
+    printf("\n      El coeficiente de correlación r es %f *//\n",r);
+
+
 }
 
 double archivo(double x[],double y[],FILE *fp)
