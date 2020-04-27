@@ -59,7 +59,8 @@ double minc(double x[], double y[])
     //Imprimiendo los datos importantes de la función
     m=(((n*sumaxy)-(sumax*sumay))/((n*sumaxc)-(sumax*sumax))); //Se utiliza la fórmula de pendiente para mínimos cuadrados.
     b=((sumay-(m*sumax))/n); //Caso similar con el y-intersécto  
-   
+    printf("La pendiente es : %.3f",m);
+    printf("El corte de datos es: %.3f",b);
     //Imprimiendo sus errores
     merr=sqrt(n*eps/(sumaxc-(pow(sumax,2))));  //Error de la pendiente
     berr=eps/n; //Error del intersecto
