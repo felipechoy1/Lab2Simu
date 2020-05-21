@@ -61,7 +61,9 @@ long double Cohete::tiempo()
 
 
 long double Cohete::despegar()
-{   FILE *fp;
+{   
+    //Se crean los respectivos punteros encargados de generar los archivos de texto, en conjunto con los scripts que harán que salgan las gráficas.
+    FILE *fp;
     FILE *wp;
     FILE *hp;
     char filename[64], noname[64],yesname[64];
@@ -76,7 +78,8 @@ long double Cohete::despegar()
     fp=fopen(filename,"w");
     wp=fopen(noname,"w");
     hp=fopen(yesname,"w");
-    float ymax=0;
+    //Se hace el método numérico para encontrar cada parte
+    float ymax=0; //Encargado de la altura máxima
     float tiempo;
     float mc=mo+mfo;
     float delta=1;
@@ -115,7 +118,7 @@ long double Cohete::despegar()
         fprintf(hp,"%.3f\t %.3f\n ",dydt,y);
           
     }
-
+       // Esta sección se encarga de generar cada script encargado de hacer cada gráfica.
        fclose(fp);
        fclose(wp);
        fclose(hp);  
@@ -146,6 +149,8 @@ long double Cohete::despegar()
        fp=fopen("script9.gp","w");
        fprintf(fp," \n set title 'Gráfica de velocidad(m/s) versus altura(m) Cohete 3'\n set xlabel 'altura (m)'\n set ylabel 'velocidad (m/s)'\nplot '9.txt'\n set term png\n set output '3velvsaltura.png'\n replot\n set term x11");
        fclose(fp);
+       
+       //Se imprimen los resultados de cada cohete en la consola
        cout<<"1.El tiempo de impacto es "<<tiempo<<"s"<<endl; //Se manda a imprimir los resultados.
        cout<<"2.Su altura maxima es: "<<ymax<<"m"<<endl;
        cout <<"3. El tiempo en que se queda sin combustible el cohete es: "<<t<<"s"<<endl;
@@ -185,9 +190,9 @@ long double Cohete::g()
 int main()
 {
     Cohete c1(3e7,3.248e-4,61.27,201.06,1.1e5,1.5e6,0,0); //Se inicializa el primer cohete
-    Cohete c2(2.7e7,2.248e-4,61.27,201.06,1.1e5,1.5e6,0,0);
-    Cohete c3(2.5e7,2.248e-4,70.25,215.00,1.8e5,2.1e6,0,0);
-    cout<<"\n \t Datos del cohete 1!"<<endl;
+    Cohete c2(2.7e7,2.248e-4,61.27,201.06,1.1e5,1.5e6,0,0);//Se inicializa el segundo cohete
+    Cohete c3(2.5e7,2.248e-4,70.25,215.00,1.8e5,2.1e6,0,0);//Se inicializa el tercer cohete
+    cout<<"\n \t Datos del cohete 1!"<<endl; 
     c1.tiempo();
     c1.despegar();
     cout<<"\n \t Datos del cohete 2!"<<endl;
@@ -196,6 +201,7 @@ int main()
     cout<<"\n \t Datos del cohete 3!"<<endl;
     c3.tiempo();
     c3.despegar();
+    //Se ejecturan los scripts en la consola de bash, seguido de eliminarlos.
     system("gnuplot -l 'script1.gp' 'script2.gp' 'script3.gp' 'script4.gp' 'script5.gp' 'script6.gp' 'script7.gp' 'script8.gp' 'script9.gp' ");
     system("rm script1.gp script2.gp script3.gp script4.gp script5.gp script6.gp script7.gp script8.gp script9.gp");  
         return 0;
